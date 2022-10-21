@@ -1,51 +1,80 @@
-# Project Title
+# Connect Four
 
-Simple overview of use/purpose.
+Two player game. Ends when one player gets four positions in a row, or when neither player is able to accomplish this task.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+There are 3 classes to develop this text-based game. A Board class that is responsible for managing the board. TextUI class that is responsible for interacting with the user. Finally, a ConnectFour class which acts as the main, calling both Board and TextUI methods.
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing and running your program.
+* checkstyle-10.3.4-all.jar
+* java.io.File
+* java.io.FileNotFoundException
+* java.io.FileWriter 
+* java.io.IOException
+* java.util.Scanner
 
 
 
 ### Executing program
 
-* How to build and run the program
-* Step-by-step bullets
+* Checkstyle Errors
 ```
-use code blocks for commands
+java -jar checkstyle-10.3.4-all.jar -c config/checkstyle/checkstyle.xml src/main/java/connectfour/*
 ```
-* include the expected output
+* Grade Build
+```
+./gradlew
+```
+* Grade Run
+```
+./gradlew run
+```
+* Run Program
+```
+java -cp build/classes/java/main connectfour.ConnectFour
+```
 
-## Limitations
+* Expected output
 
-What isn't done? What things cause errors?  
+**************MAIN MENU**************
+1. Start a new game
+2. Load game from file
+3. EXIT
+
+**************************************
+Please enter your option:  
 
 ## Author Information
 
-Your name and contact information including your email address
+NAME: Daniella Konert 
+
+STUDENT ID: 1185607
+
+EMAIL: dkonert@uoguelph.ca
+
+PHONE: (647) 967-9915
+
+
 
 ## Development History
 
-Keep a log of what things you accomplish when.  You can use git's tagging feature to tag the versions or you can reference commits.
-
+* 0.4
+  * Final release 
+  * ReadMe.md update 
+  * Java Docs added 
+  * Comments 
+* 0.3
+  * Various bug fixes and optimizations 
+  * Save/Load Function Added to Board 
+  * Checkstyle errors fixed 
 * 0.2
     * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
+    * Most Functions created for all classes 
 * 0.1
     * Initial Release
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [simple-readme] (https://gist.githubusercontent.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc/raw/d59043abbb123089ad6602aba571121b71d91d7f/README-Template.md)
-
 
 

@@ -6,26 +6,41 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Main class for managing the state of the board
+ */
 public class Board{
-
+    //init variables
     private int[][] board= new int[6][7];
 
-    public Board(){} //creates a new board
+    /**
+     * Creates new board
+     */
+    public Board(){}
 
-    //Functions
+    /**
+     * Places the piece in the first available spot chosen by the player
+     * @param position column the player has chosen
+     * @param player who is placing their piece
+     * @return 0 if it was able to place a piece false otherwise
+     */
     public int place(int position, int player) {
 
         for (int i = 5; i >= 0; i--) {
-            if (board[i][position] == 0) {
-                board[i][position] = player;
+            if (board[i][position] == 0) { //first available position in col
+                board[i][position] = player; //places player
 
-                return 0;
+                return 0; //Valid
             }
         }
 
-        return -1;
+        return -1; //Invalid
     }
 
+    /**
+     * Keeps track if a player placed 4 pieces diagonally indicating winner
+     * @return 0 if no one won and match representing the winner
+     */
     public int winnerDiagonal(){
         int match = 0;
 
@@ -64,6 +79,11 @@ public class Board{
         }
         return 0; //returns if no one won
     }
+
+    /**
+     * Keeps track if a player got 4 in a row Horizontally or Vertically indicating a winner
+     * @return 0 if no one won and match representing the winner
+     */
     public int winnerVH(){
         int match = 0;
         //Vertical Check
@@ -101,6 +121,10 @@ public class Board{
         return 0; //returns if no one won
     }
 
+    /**
+     * Calls both winnerVH and winnerDiagonal indicating if a winner has won in either
+     * @return the winner of VH or D indicating who won or if no one won
+     */
     public int winner(){
         int winnerVH = winnerVH();
         int winnerD = winnerDiagonal();
@@ -111,6 +135,11 @@ public class Board{
 
         return winnerD;
     }
+
+    /**
+     * Created the board as a string to print the state of the board
+     * @return the board
+     */
     public String toString() {
 
         String boardString = "";
@@ -125,6 +154,11 @@ public class Board{
         return boardString;
     }
 
+    /**
+     * Saves the board to a file of the user's choosing
+     * @param filename the user wants the file saved to
+     * @return 0 if file saved -1 if it failed
+     */
     public int save(String filename) {
 
         String boardString = "";
@@ -165,6 +199,11 @@ public class Board{
         return 0;
     }
 
+    /**
+     * Loads a saved file to continue the game
+     * @param filename the file the user wants to open
+     * @return 0 if it loaded -1 if it failed to do so
+     */
     public int load(String filename) {
 
         try {
@@ -185,39 +224,44 @@ public class Board{
                     return -1; //error if there is a wrong # of columns
                 }
                 for(int j = 0; j < 7; j++){ //Loops through columns
-                    board[i][j] = Integer.parseInt(splitLine[j]);
+                    board[i][j] = Integer.parseInt(splitLine[j]); //splits each number
                     if ((board[i][j] < 0) || (board[i][j] > 2)) {
-                        return -1;
+                        return -1; //Invalid
                     }
 
                 }
             }
         } catch (FileNotFoundException e) {
-            return -1;
+            return -1; //Invalid
         }
 
-        return 0;
+        return 0; //Valid
 
     }
 
+    /**
+     * Calculates whose turn it is on a game
+     * @return which player's turn it is
+     */
     public int calcTurn() {
+        //Init variables
         int moveP1 = 0;
         int moveP2 = 0;
 
         for (int i = 0; i < 6; i++){ //Row Loop
             for (int j = 0; j < 7; j++){ //Column Loop
                 if (board[i][j] == 1){
-                    moveP1++;
+                    moveP1++; //amount of times P1 placed a piece
                 } else if (board[i][j] == 2) {
-                    moveP2++;
+                    moveP2++; //amount of times P2 placed a piece
                 }
             }
         }
 
         if (moveP2 >= moveP1) {
-            return 1;
+            return 1; //P1's turn
         } else {
-            return 2;
+            return 2; //P2's turn
         }
 
     }
