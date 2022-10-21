@@ -67,7 +67,7 @@ public class TextUI{
     static void winner(int player, String board) {
 
         System.out.println(board);
-        System.out.println("PLAYER" + player + "IS THE WINNER!!!");
+        System.out.println("PLAYER" + player + " IS THE WINNER!!!");
 
     }
 
