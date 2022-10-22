@@ -83,7 +83,7 @@ public class TextUI{
     /**
      * Invalid move error message
      */
-    static void invalidMove(){
+    static void invalidMove(){""
 
         System.out.println("ERROR INVALID MOVE");
 
