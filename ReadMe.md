@@ -27,7 +27,7 @@ java -jar checkstyle-10.3.4-all.jar -c config/checkstyle/checkstyle.xml src/main
 ```
 * Grade Build
 ```
-./gradlew
+./gradlew build
 ```
 * Grade Run
 ```
