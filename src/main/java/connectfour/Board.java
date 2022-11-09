@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 /**
  * Main class for managing the state of the board
+ * @author daniellakonert
  */
 public class Board{
     //init variables
@@ -24,7 +25,7 @@ public class Board{
      * @param player who is placing their piece
      * @return 0 if it was able to place a piece false otherwise
      */
-    public int place(int position, int player) {
+    public int placePieceOnBoard(int position, int player) {
 
         for (int i = 5; i >= 0; i--) {
             if (board[i][position] == 0) { //first available position in col
@@ -41,7 +42,7 @@ public class Board{
      * Keeps track if a player placed 4 pieces diagonally indicating winner
      * @return 0 if no one won and match representing the winner
      */
-    public int winnerDiagonal(){
+    public int checkForWinnerDiagonal(){
         int match = 0;
 
         //Diagonal Check Left
@@ -84,7 +85,7 @@ public class Board{
      * Keeps track if a player got 4 in a row Horizontally or Vertically indicating a winner
      * @return 0 if no one won and match representing the winner
      */
-    public int winnerVH(){
+    public int checkForWinnerVerticalHorizontal(){
         int match = 0;
         //Vertical Check
         for (int i = 5; i >= 3; i--){ //Row Loop
@@ -125,9 +126,9 @@ public class Board{
      * Calls both winnerVH and winnerDiagonal indicating if a winner has won in either
      * @return the winner of VH or D indicating who won or if no one won
      */
-    public int winner(){
-        int winnerVH = winnerVH();
-        int winnerD = winnerDiagonal();
+    public int checkForWinner(){
+        int winnerVH = checkForWinnerVerticalHorizontal();
+        int winnerD = checkForWinnerDiagonal();
 
         if (winnerVH != 0) {
             return winnerVH;
@@ -224,7 +225,11 @@ public class Board{
                     return -1; //error if there is a wrong # of columns
                 }
                 for(int j = 0; j < 7; j++){ //Loops through columns
-                    board[i][j] = Integer.parseInt(splitLine[j]); //splits each number
+                    try {
+                        board[i][j] = Integer.parseInt(splitLine[j]); //splits each number
+                    } catch (Exception e) {
+                        return -1; //Invalid format
+                    }
                     if ((board[i][j] < 0) || (board[i][j] > 2)) {
                         return -1; //Invalid
                     }
@@ -266,4 +271,18 @@ public class Board{
 
     }
 
+    /**
+     * Checks for tie game
+     * @return 1 if there is a tie game and 0 if there isn't
+     */
+    public int checkForTie(){
+        for (int i = 0; i < 6; i++) { //row loop
+            for (int j = 0; j < 7; j++) { //column loop
+                if (board[i][j] == 0) {
+                    return 0; //there is an empty space
+                }
+            }
+        }
+        return 1; //returns 1 if there is no empty space - tie
+    }
 }

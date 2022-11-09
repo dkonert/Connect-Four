@@ -2,12 +2,13 @@ package connectfour;
 
 /**
  * Main class for running Connect Four Game calling both functions
+ * @author daniellakonert
  */
 public class ConnectFour{
 
     /**
      * Main class for running program
-     * @param args
+     * @param args not used
      */
     public static void main(String[] args) {
         Board board = new Board(); //init board
@@ -43,19 +44,19 @@ public class ConnectFour{
                 }
                 return;
             }
-            if (board.place(position, turn) == -1) {
+            if (board.placePieceOnBoard(position, turn) == -1) {
                 TextUI.invalidMove(); //Error message
                 continue;
             }
-            if (turn == 1) {
-                turn = 2; //changes turn if player 1 just played to player 2
-            } else {
-                turn = 1; //changes turn if player 2 just played to player 1
-            }
-            int winner = board.winner(); //check to see if there is a winner
-            if (winner != 0) {
+            turn = (turn == 1) ? 2 : 1; //swaps player turn
+            int winner = board.checkForWinner();
+            if (winner != 0) { //check to see if there is a winner
                 TextUI.winner(winner, board.toString()); //outputs winner
                 done = true; //Game is done
+            }
+            if (board.checkForTie() == 1) { //checks if there is a tie game
+                done = true; //ends game
+                TextUI.tie(); //outputs tie game
             }
         }
     }

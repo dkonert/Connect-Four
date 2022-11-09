@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 /**
  * Main Class for interacting with the user
+ * @author daniellakonert
  */
 public class TextUI{
     //Init Scanner
-    private static Scanner io = new Scanner(System.in);
+    private static final Scanner IO = new Scanner(System.in);
 
     //Outputs Menu
     static int mainMenu(){
@@ -18,8 +19,8 @@ public class TextUI{
         System.out.println("**************************************");
         //Takes user's choice
         System.out.println("Please enter your option: ");
-        int choice = io.nextInt();
-        io.nextLine();
+        int choice = IO.nextInt();
+        IO.nextLine();
 
         return choice;
 
@@ -33,26 +34,23 @@ public class TextUI{
      */
     static int turn(int player, String board){
         //Init variables
-        int choice = -1;
-        int save = -1;
+        int choice = -2;
 
         System.out.println(board); //outputs board
         System.out.println("It is player " + player + "'s turn");
 
-        while ((save != 1) && (save != 0)) { //checks to see if they want to save/continue
-            System.out.println("Enter 1 to save and quit game and 0 to continue: ");
-            save = io.nextInt();
-        }
         //tells program to save and quit
-        if (save == 1) {
-            io.nextLine();
-            return -1; //save and quit game
-        }
-        //gets players choice, loops until valid
-        while((choice < 0) || (choice > 6)) {
 
-            System.out.println("Enter a number between 0 and 6 to place your piece: ");
-            choice = io.nextInt();
+        //gets players choice, loops until valid
+        while((choice < -1) || (choice > 6)) {
+
+            System.out.println("Enter a number between 0 and 6 to place your piece or -1 to save and exit: ");
+            choice = IO.nextInt();
+
+            if (choice == -1) {
+                IO.nextLine();
+                return -1; //save and quit game
+            }
 
         }
 
@@ -100,7 +98,7 @@ public class TextUI{
         //checks if filename is less than 3 characters otherwise not valid
         while (filename.length() < 3) {
             System.out.println("Enter your file name: ");
-            filename = io.nextLine();
+            filename = IO.nextLine();
         }
 
         return filename;
@@ -123,6 +121,13 @@ public class TextUI{
 
         System.out.println("ERROR FAIL TO SAVE FILE");
 
+    }
+
+    /**
+     * Tie Game message
+     */
+    static void tie() {
+        System.out.println("TIE GAME");
     }
 
 
